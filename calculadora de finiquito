@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Finiquito</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+        <h2 class="text-2xl font-bold text-center mb-6">Calculadora de Finiquito</h2>
+        <form id="finiquitoForm">
+            <label class="block font-semibold">Salario diario:</label>
+            <input type="number" id="salarioDiario" class="w-full border p-2 rounded mb-4" required>
+            
+            <label class="block font-semibold">Días trabajados no pagados:</label>
+            <input type="number" id="diasTrabajados" class="w-full border p-2 rounded mb-4" required>
+            
+            <label class="block font-semibold">Días de vacaciones no tomadas:</label>
+            <input type="number" id="vacaciones" class="w-full border p-2 rounded mb-4" required>
+            
+            <label class="block font-semibold">Días de aguinaldo proporcional:</label>
+            <input type="number" id="aguinaldo" class="w-full border p-2 rounded mb-4" required>
+            
+            <button type="button" onclick="calcularFiniquito()" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Calcular</button>
+        </form>
+        <div class="mt-6 text-center">
+            <h3 class="text-xl font-semibold">Total Finiquito:</h3>
+            <p id="resultado" class="text-lg text-green-600 font-bold mt-2">$0.00</p>
+        </div>
+    </div>
+    
+    <script>
+        function calcularFiniquito() {
+            let salario = parseFloat(document.getElementById('salarioDiario').value);
+            let diasTrabajados = parseFloat(document.getElementById('diasTrabajados').value);
+            let vacaciones = parseFloat(document.getElementById('vacaciones').value);
+            let aguinaldo = parseFloat(document.getElementById('aguinaldo').value);
+            
+            let pagoDiasTrabajados = salario * diasTrabajados;
+            let pagoVacaciones = (salario * vacaciones) * 1.25; // Prima vacacional del 25%
+            let pagoAguinaldo = (salario * aguinaldo) / 15; // Aguinaldo proporcional (15 días al año)
+            
+            let totalFiniquito = pagoDiasTrabajados + pagoVacaciones + pagoAguinaldo;
+            document.getElementById('resultado').textContent = `$${totalFiniquito.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
